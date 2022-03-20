@@ -1,0 +1,113 @@
+                                                       day05
+  
+  springmvc内部请求的处理流程，也就是springmvc接收请求，到处理完成的过程。
+  以some.do请求为例。
+  1、用户发起请求some.do
+  2、DispatcherServlet接收请求some.do，把请求转交给处理器映射器
+      （1）处理器映射器：springmvc框架中的一种对象，框架把实现了HandlerMapping接口的类都叫做映射器（可以有多个），例如：RequestMappingHandlerMapping
+           处理器映射器作用：根据请求，从springmvc容器对象中获取处理器对象（MyController controller = context.getBean("myController",MyController.class)）
+                             框架把找到的处理器对象放到一个叫做处理器执行链（HandlerExecutionChain）的类中保存
+
+      （2）HandlerExecutionChain：类中保存着：1、处理器对象 2、项目中的所有拦截器List<HandlerInterceptor> interceptorList
+
+  3、DispatcherServlet把2中的HandlerExecutionChain中的处理器对象交给了处理器适配器对象（多个）
+      （1）处理器适配器：springmvc框架中的对象，需要实现HandlerAdapter接口
+           处理器适配器作用：执行处理器方法（调用MyController.doSome得到返回值ModelAndView）
+
+  
+  4、DispatcherServlet把3中获取到的ModeAndView交给了视图解析器对象。
+     视图解析器：springmvc中的对象，需要实现ViewResolver接口（可以有多个）
+
+     视图解析器的作用：组成视图完整路径，使用前缀，后缀。并创建View对象 
+
+                      View是一个接口，表示视图的，在框架中jsp，html不是string表示的，而是
+		      使用View和他的实现类表示视图的
+
+		      InternalResourceView：视图类，表示jsp文件，视图解析器会创建InternalResourceView类对象
+		      这个对象的里面，有一个属性url=转发的视图的路径	  
+  
+  5、DispatcherServlet把4步骤中创建的View对象获取到，调用View类自己的方法，把Model数据数据放入到request作用域
+     执行对象视图的forward。请求结束。
+
+     DispatcherServlet的核心方法
+     protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpServletRequest processedRequest = request;
+		HandlerExecutionChain mappedHandler = null;
+		boolean multipartRequestParsed = false;
+
+		WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
+
+		try {
+			ModelAndView mv = null;
+			Exception dispatchException = null;
+
+			try {
+				processedRequest = checkMultipart(request);
+				multipartRequestParsed = (processedRequest != request);
+
+				// Determine handler for the current request.
+				mappedHandler = getHandler(processedRequest); //中央调度器调用适配器
+				if (mappedHandler == null) {
+					noHandlerFound(processedRequest, response);
+					return;
+				}
+
+				// Determine handler adapter for the current request.
+				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
+
+				// Process last-modified header, if supported by the handler.
+				String method = request.getMethod();
+				boolean isGet = "GET".equals(method);
+				if (isGet || "HEAD".equals(method)) {
+					long lastModified = ha.getLastModified(request, mappedHandler.getHandler());
+					if (new ServletWebRequest(request, response).checkNotModified(lastModified) && isGet) {
+						return;
+					}
+				}
+
+				if (!mappedHandler.applyPreHandle(processedRequest, response)) {
+					return;
+				}
+
+				// Actually invoke the handler.
+				mv = ha.handle(processedRequest, response, mappedHandler.getHandler()); //执行处理器方法
+
+				if (asyncManager.isConcurrentHandlingStarted()) {
+					return;
+				}
+
+				applyDefaultViewName(processedRequest, mv);
+				mappedHandler.applyPostHandle(processedRequest, response, mv);
+			}
+			catch (Exception ex) {
+				dispatchException = ex;
+			}
+			catch (Throwable err) {
+				// As of 4.3, we're processing Errors thrown from handler methods as well,
+				// making them available for @ExceptionHandler methods and other scenarios.
+				dispatchException = new NestedServletException("Handler dispatch failed", err);
+			}
+			processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
+		}
+		catch (Exception ex) {
+			triggerAfterCompletion(processedRequest, response, mappedHandler, ex);
+		}
+		catch (Throwable err) {
+			triggerAfterCompletion(processedRequest, response, mappedHandler,
+					new NestedServletException("Handler processing failed", err));
+		}
+		finally {
+			if (asyncManager.isConcurrentHandlingStarted()) {
+				// Instead of postHandle and afterCompletion
+				if (mappedHandler != null) {
+					mappedHandler.applyAfterConcurrentHandlingStarted(processedRequest, response);
+				}
+			}
+			else {
+				// Clean up any resources used by a multipart request.
+				if (multipartRequestParsed) {
+					cleanupMultipart(processedRequest);
+				}
+			}
+		}
+	}

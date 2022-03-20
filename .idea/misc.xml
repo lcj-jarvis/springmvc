@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/001-hello-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/001-hello-springmvcplus" />
+    <file type="web" url="file://$PROJECT_DIR$/002-rest-springmvcplus" />
+    <file type="web" url="file://$PROJECT_DIR$/004-return-springmvcplus" />
+    <file type="web" url="file://$PROJECT_DIR$/005-restful-springmvcplus" />
+    <file type="web" url="file://$PROJECT_DIR$/01-hello-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/02-requestMapper-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/03-receiveparam-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/04-return-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/05-url-pattern -spirngmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/06-path-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/07-ssm" />
+    <file type="web" url="file://$PROJECT_DIR$/08-forward-redirect" />
+    <file type="web" url="file://$PROJECT_DIR$/09-exception-handler" />
+    <file type="web" url="file://$PROJECT_DIR$/10-interceptor" />
+    <file type="web" url="file://$PROJECT_DIR$/11-multiInterceptor" />
+    <file type="web" url="file://$PROJECT_DIR$/12-interceptor - permission" />
+    <file type="web" url="file://$PROJECT_DIR$/untitled" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/01-hello-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/02-requestMapper-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/03-receiveparam-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/04-return-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/05-url-pattern -spirngmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/06-path-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/07-ssm/pom.xml" />
+        <option value="$PROJECT_DIR$/08-forward-redirect/pom.xml" />
+        <option value="$PROJECT_DIR$/09-exception-handler/pom.xml" />
+        <option value="$PROJECT_DIR$/10-interceptor/pom.xml" />
+        <option value="$PROJECT_DIR$/11-multiInterceptor/pom.xml" />
+        <option value="$PROJECT_DIR$/12-interceptor - permission/pom.xml" />
+        <option value="$PROJECT_DIR$/springmvc-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/004-return-springmvcplus/pom.xml" />
+        <option value="$PROJECT_DIR$/005-restful-springmvcplus/pom.xml" />
+        <option value="$PROJECT_DIR$/../springboot2-base/04-springboot-web-requestbody/pom.xml" />
+        <option value="$PROJECT_DIR$/001-hello-springmvc/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/001-hello-springmvcplus/pom.xml" />
+        <option value="$PROJECT_DIR$/untitled/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

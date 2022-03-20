@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="12-interceptor - permission:war">
+    <output-path>$PROJECT_DIR$/12-interceptor - permission/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>12-interceptor - permission</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="12-interceptor - permission-1.0.war">
+      <element id="artifact" artifact-name="12-interceptor - permission:war exploded" />
+    </root>
+  </artifact>
+</component>

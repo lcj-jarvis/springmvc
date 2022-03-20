@@ -1,0 +1,17 @@
+# Project exclude paths
+/01-hello-springmvc/target/
+/001-hello-springmvc/target/
+/02-requestMapper-springmvc/target/
+/002-rest-springmvcplus/target/
+/03-receiveparam-springmvc/target/
+/04-return-springmvc/target/
+/004-return-springmvcplus/target/
+/05-url-pattern -spirngmvc/target/
+/005-restful-springmvcplus/target/
+/06-path-springmvc/target/
+/07-ssm/target/
+/08-forward-redirect/target/
+/09-exception-handler/target/
+/10-interceptor/target/
+/11-multiInterceptor/target/
+/12-interceptor - permission/target/

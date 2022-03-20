@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="001-hello-springmvc" />
+        <module name="004-return-springmvcplus" />
+        <module name="06-path-springmvc" />
+        <module name="05-url-pattern -spirngmvc" />
+        <module name="12-interceptor - permission" />
+        <module name="10-interceptor" />
+        <module name="04-return-springmvc" />
+        <module name="04-springboot-web-requestbody" />
+        <module name="03-receiveparam-springmvc" />
+        <module name="005-restful-springmvcplus" />
+        <module name="002-rest-springmvcplus" />
+        <module name="11-multiInterceptor" />
+        <module name="08-forward-redirect" />
+        <module name="01-hello-springmvc" />
+        <module name="07-ssm" />
+        <module name="09-exception-handler" />
+        <module name="02-requestMapper-springmvc" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="001-hello-springmvc" target="1.8" />
+      <module name="001-hello-springmvcplus" target="1.8" />
+      <module name="002-rest-springmvcplus" target="1.8" />
+      <module name="004-return-springmvcplus" target="1.8" />
+      <module name="005-restful-springmvcplus" target="1.8" />
+      <module name="01-hello-springmvc" target="1.8" />
+      <module name="02-requestMapper-springmvc" target="1.8" />
+      <module name="03-receiveparam-springmvc" target="1.8" />
+      <module name="04-return-springmvc" target="1.8" />
+      <module name="04-springboot-web-requestbody" target="1.8" />
+      <module name="05-url-pattern -spirngmvc" target="1.8" />
+      <module name="06-path-springmvc" target="1.8" />
+      <module name="07-ssm" target="1.8" />
+      <module name="08-forward-redirect" target="1.8" />
+      <module name="09-exception-handler" target="1.8" />
+      <module name="10-interceptor" target="1.8" />
+      <module name="11-multiInterceptor" target="1.8" />
+      <module name="12-interceptor - permission" target="1.8" />
+      <module name="springmvc-parent" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="04-springboot-web-requestbody" options="-parameters" />
+    </option>
+  </component>
+</project>

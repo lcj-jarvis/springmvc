@@ -1,0 +1,22 @@
+REST：即Representational State Transfer (资源)表现成状态转化。是目前最流行的一种互联网软件架构
+资源：网络的一个实体，或者说是网络上的一个具体信息。URI即为每一个资源的独一无二的识别符
+表现层：把资源具体呈现出来的形式
+状态转化：每发出一个请求，就代表了客户端和服务器的一次交互过程。Http协议，是一个无状态协议，
+        必须通过某种手段，让服务器端发生“状态转换”。而这种转换是建立在表现层之上的。所以就是
+        "表现层状态转换"。具体说，就是：http协议里面，四个表示操作方式的动作：
+        GET\POST\PUT\DELETE。他们分别对应四种基本操作：
+        GET用来获取资源
+        POST新建资源
+        PUT更新资源
+        DELETE删除资源
+
+        示例：
+        – /order/1 HTTP GET ：得到 id = 1 的 order
+        – /order/1 HTTP DELETE：删除 id = 1的 order
+        – /order/1 HTTP PUT：更新id = 1的 order
+        – /order HTTP POST：新增 order
+
+        HiddenHttpMethodFilter:
+        浏览器from表单只支持GET和POST请求，而DELETE和PUT等method并不支持
+        Spring3.0添加一个过滤器，可以将这些请求转换为标准的http方法，使得支持
+        GET、POST、PUT、DELETE

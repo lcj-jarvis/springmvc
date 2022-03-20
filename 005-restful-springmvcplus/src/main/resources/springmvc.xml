@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+       <!--开启组件扫描器-->
+       <context:component-scan base-package="com.mrlu.springmvc"></context:component-scan>
+
+       <!--声明springmvc框架中的视图解析器，帮助开发人员设置视图文件的路径-->
+       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+              <!--前缀：视图文件的路径-->
+              <property name="prefix" value="/WEB-INF/view/"></property>
+              <!--后缀：视图文件的扩展名-->
+              <property name="suffix" value=".jsp"></property>
+       </bean>
+
+       <!--
+       <mvc:annotation-driven />
+       会自动注册RequestMappingHandlerMapping
+              RequestMappingHandlerAdapter 与
+              ExceptionHandlerExceptionResolver 三个bean。
+       • 还将提供以下支持：
+              – 支持使用 ConversionService 实例对表单参数进行类型转换
+              – 支持使用 @NumberFormat annotation、@DateTimeFormat
+              注解完成数据类型的格式化
+              – 支持使用 @Valid 注解对 JavaBean 实例进行 JSR 303 验证
+              – 支持使用 @RequestBody 和 @ResponseBody 注解
+       -->
+       <!--处理静态资源的访问问题-->
+       <mvc:default-servlet-handler/>
+       <!--该注解驱动用于解决静态资源的访问问题，以及配置自定义转换器-->
+       <mvc:annotation-driven conversion-service="myConversionService"/>
+       <!--<mvc:annotation-driven />-->
+
+       <!--
+          debug调试，断点打在ModelAttributeMethodProcessor的resolveArgument方法的
+          		    bindRequestParameters(binder, webRequest);处，运行程序添加新的employee
+
+          注意：
+          1、如果ConversionServiceFactoryBean和配置conversion-service属性的注解驱动一起用，创建的是
+             DefaultConversionService，包含GenericConversionService，
+             不能格式化pojo类的日期和数字。
+
+          2、ConversionServiceFactoryBean和没有配置conversion-service属性的注解驱动一起使用，创建的是
+             DefaultFormattingConversionService，包含GenericConversionService，
+             可以格式化pojo类的日期和数字
+
+          3、FormattingConversionServiceFactoryBean和没有配置conversion-service属性的注解驱动，创建的是
+             DefaultFormattingConversionService，包含GenericConversionService，
+             可以格式化pojo类的日期和数字
+
+          4、FormattingConversionServiceFactoryBean和配置conversion-service属性的注解驱动，创建的是
+             DefaultFormattingConversionService，包含GenericConversionService，
+             可以格式化pojo类的日期和数字
+
+             注意：
+             FormattingConversionService 实现类既具有类型转换的功能，又具有格式化的功能
+             使用FormattingConversionService既可以使用自定义的转换器，也可以使用使用SpringMVC的转换器
+
+             格式化错误的信息放在BindingResult中，可以在方法中使用这个形参，获取错误信息
+       -->
+       <!--配置自定义转换器-->
+       <!--<bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+       <bean id="myConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+              <property name="converters">
+                     <set>
+                         <ref bean="employeeConverter"></ref>
+                     </set>
+              </property>
+       </bean>
+
+       <!--国际化-->
+       <!--配置国际化资源文件-->
+       <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+              <property name="basename" value="i18n"></property>
+       </bean>
+
+       <!--不经过处理器，直接跳转-->
+       <!--<mvc:view-controller path="/i18n" view-name="i18n"/>-->
+       <mvc:view-controller path="/i18n2" view-name="i18n2"/>
+
+       <!--配置拦截器LocaleChangeInterceptor-->
+       <mvc:interceptors>
+              <mvc:interceptor>
+                     <mvc:mapping path="/i18n"/>
+                     <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+              </mvc:interceptor>
+       </mvc:interceptors>
+       <!--配置SessionLocalResolver-->
+       <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+
+       <!--文件上传-->
+       <!--
+            配置MultipartResolver
+            CommonsMultipartResolver实现了MultipartResolver
+       -->
+       <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+            <property name="defaultEncoding" value="UTF-8"></property>
+              <!--最大的上传大小，以字节为单位-->
+            <!--<property name="maxUploadSize" value="10240000"></property>-->
+       </bean>
+</beans>
